@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0c0a13">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Sync-Tax">
+  <title>Sync-Tax Pro Mobile</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="css/farben.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <header id="kopf">
+    <h1 id="titel">Sync-Tax Pro</h1>
+    <span id="stand"></span>
+    <button id="menue-knopf" aria-label="Menü">⋯</button>
+  </header>
+  <p id="meldung" role="alert" hidden></p>
+  <main id="inhalt"></main>
+  <!-- Leiste: schwebend, Strich über dem aktiven Reiter, Plus groß in der Mitte, „Mehr“ öffnet das Menü (Nutzer 22.11.2026).
+       Symbole als eigene Linien-SVG (keine Emojis: sehen auf jedem Handy anders aus). -->
+  <nav id="leiste" hidden>
+    <button data-ansicht="termine"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Termine</button>
+    <button data-ansicht="geld"><svg viewBox="0 0 24 24"><path d="M17.5 7a6.5 6.5 0 1 0 0 10"/><path d="M4.5 10.5h9M4.5 13.5h9"/></svg>Geld</button>
+    <button data-ansicht="eintragen" class="plus"><i><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></i>Eintragen</button>
+    <button data-ansicht="dispo"><svg viewBox="0 0 24 24"><path d="M4 8.5A1.5 1.5 0 0 1 5.5 7h2.3l1.4-2.2h5.6L16.2 7h2.3A1.5 1.5 0 0 1 20 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 17.5z"/><circle cx="12" cy="13" r="3.3"/></svg>Dispo</button>
+    <button id="mehr-knopf"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Mehr</button>
+  </nav>
+  <div id="menue" hidden><div id="menue-inhalt"></div></div>
+  <input type="file" id="datei" hidden>
+  <script src="lib/sql-wasm.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

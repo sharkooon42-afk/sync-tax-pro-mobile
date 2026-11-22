@@ -1,0 +1,118 @@
+/* Aussehen wie das PC-Programm: Farben kommen aus farben.css (erzeugt aus syncpro/ui/theme.py). Zuerst fürs Handy. */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  display: flex; flex-direction: column; background: var(--bg); color: var(--text);
+  font: 15px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  padding-top: env(safe-area-inset-top);
+}
+button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; }
+[hidden] { display: none !important; }
+
+#kopf { display: flex; align-items: center; gap: 10px; padding: 14px 16px 8px; }
+#titel { font-size: 18px; flex: 1; }
+#stand { font-size: 12px; color: var(--muted); }
+#menue-knopf { font-size: 22px; line-height: 1; padding: 2px 8px; color: var(--muted); }
+#meldung { margin: 4px 12px 8px; padding: 10px 12px; border-radius: 8px; background: color-mix(in srgb, var(--amber) 14%, var(--bg));
+  border: 1px solid color-mix(in srgb, var(--amber) 45%, var(--bg)); color: var(--amber); font-size: 13px; }
+
+#inhalt { flex: 1; overflow-y: auto; padding: 6px 12px 16px; -webkit-overflow-scrolling: touch; }
+
+/* Leiste (Nutzer 22.11.2026: Varianten 5 + 6 + 4): schwebend mit Abstand zum Rand, Strich über dem aktiven Reiter,
+   Plus groß in der Mitte, „Mehr“ statt ⋯ oben. Sie steht im Fluss unter dem Inhalt, verdeckt also nie eine Karte. */
+#leiste { position: relative; display: flex; align-items: flex-end; justify-content: space-around;
+  margin: 4px 12px calc(12px + env(safe-area-inset-bottom)); padding: 8px 0 9px; border-radius: 20px;
+  background: color-mix(in srgb, var(--hover) 92%, transparent); border: 1px solid var(--border); box-shadow: 0 6px 20px rgba(0, 0, 0, .5); }
+#leiste button { position: relative; flex: 1; font-size: 11px; color: var(--muted); }
+#leiste svg { display: block; width: 24px; height: 24px; margin: 0 auto 2px; fill: none; stroke: currentColor; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round; }
+#leiste button.an { color: var(--purple); font-weight: 700; }
+#leiste button.an::before { content: ""; position: absolute; top: -9px; left: 26%; right: 26%; height: 3px; border-radius: 0 0 3px 3px;
+  background: var(--purple); }
+#leiste button.plus::before { display: none; }
+#leiste button.plus i { display: block; width: 52px; height: 52px; margin: -30px auto 3px; padding-top: 14px; border-radius: 50%;
+  background: var(--purple); color: #fff; box-shadow: 0 4px 14px color-mix(in srgb, var(--purple) 45%, transparent); }
+#leiste button.plus.an i { outline: 2px solid var(--phell); outline-offset: 2px; }
+#leiste button.plus svg { margin: 0 auto; }
+
+.reiter { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin: 0 -12px 10px; padding: 0 8px; }
+.reiter button { padding: 9px 12px; color: var(--muted); font-weight: 600; border-bottom: 2px solid transparent; }
+.reiter button.an { color: var(--purple); border-bottom-color: var(--purple); font-weight: 700; }
+
+.karte { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; margin-bottom: 8px; }
+.titel { font-weight: 700; }
+.leise { color: var(--muted); font-size: 13px; }
+.leise.klein { font-size: 12px; margin-top: 10px; }
+.leer { color: var(--muted); text-align: center; margin: 22px 0; font-size: 13px; }
+.hinweis { color: var(--muted); font-size: 12px; margin: 2px 2px 12px; }
+.abschnitt { font-size: 12px; letter-spacing: .4px; text-transform: uppercase; color: var(--phell); margin: 6px 2px 8px; }
+.zeile { display: flex; justify-content: space-between; gap: 10px; }
+
+.tag { display: flex; gap: 10px; align-items: stretch; margin-bottom: 8px; }
+.tag .karte { flex: 1; margin: 0; }
+.datum { width: 46px; flex: none; text-align: center; background: var(--soft); border-radius: 10px; padding: 6px 0; }
+.datum b { display: block; font-size: 19px; }
+.datum small { display: block; color: var(--phell); font-size: 10px; text-transform: uppercase; }
+/* Terminliste: fünf Darstellungen (d1 … d5), Wahl im Menü „Mehr“ (Nutzer 22.11.2026, Standard d2). „Heute“ immer lila. */
+.trenner { display: flex; gap: 8px; align-items: center; font-size: 12px; letter-spacing: .4px; text-transform: uppercase;
+  color: var(--phell); margin: 12px 2px 8px; }
+.trenner::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+.termine > .trenner:first-child, .termine > .tagkopf:first-child { margin-top: 2px; }
+.tag.heute .datum { background: var(--purple); }
+.tag.heute .datum small { color: #fff; }
+.d1 .tag.heute .karte { border-color: var(--purple); box-shadow: 0 0 0 1px var(--purple) inset; }
+.tagkopf { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin: 12px 2px 6px; }
+.tagkopf span { color: var(--muted); font-weight: 400; }
+.tagkopf.heute { color: var(--purple); }
+.zeitkarte { display: flex; gap: 12px; }
+.zeitkarte .uhr { width: 44px; flex: none; font-weight: 700; font-size: 14px; color: var(--phell); }
+.zeitkarte .rest { flex: 1; min-width: 0; }
+.zeitkarte.heute { border-color: var(--purple); }
+.zeile-kompakt { display: flex; gap: 10px; align-items: center; padding: 9px 4px; border-bottom: 1px solid var(--border); }
+.zeile-kompakt .uhr { width: 42px; flex: none; font-weight: 700; font-size: 13px; color: var(--phell); }
+.zeile-kompakt .mitte { flex: 1; min-width: 0; }
+.zeile-kompakt .mitte b { display: block; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mini { font-size: 10px; color: var(--phell); border: 1px solid var(--soft); border-radius: 6px; padding: 0 5px; }
+.punkt { width: 10px; height: 10px; border-radius: 50%; flex: none; background: var(--muted); }
+.punkt.geplant { background: #7aa7f5; } .punkt.abgerechnet { background: var(--amber); } .punkt.teilweise { background: var(--blue); }
+.punkt.bezahlt { background: var(--green); } .punkt.fehlt { background: var(--rhell); }
+.strahl { position: relative; padding-left: 22px; }
+.strahl::before { content: ""; position: absolute; left: 6px; top: 6px; bottom: 0; width: 2px; background: var(--border); }
+.knoten { position: relative; margin-bottom: 8px; }
+.knoten::before { content: ""; position: absolute; left: -21px; top: 14px; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--bg); border: 2px solid var(--muted); }
+.knoten.heute::before { background: var(--purple); border-color: var(--purple); box-shadow: 0 0 0 4px color-mix(in srgb, var(--purple) 30%, transparent); }
+.knoten.heute > .karte { border-color: var(--purple); }
+.knoten .klein { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--phell); margin: 0 0 3px 2px; }
+.knoten.heute .klein { color: var(--purple); }
+.stapel { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+
+/* Wahl der Darstellung im Menü: je eine verkleinerte, echte Vorschau */
+.darstellung { display: flex; gap: 12px; align-items: center; width: 100%; text-align: left; padding: 8px 4px; border-bottom: 1px solid var(--border); }
+.darstellung .vorschau { width: 96px; height: 92px; flex: none; overflow: hidden; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--bg); pointer-events: none; }
+.darstellung .vorschau > .termine { width: 300px; padding: 6px; transform: scale(.32); transform-origin: top left; }
+.darstellung.an { color: var(--purple); }
+.darstellung.an .vorschau { border-color: var(--purple); }
+#menue-inhalt { max-height: 85vh; overflow-y: auto; }
+
+.etiketten { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.etikett { font-size: 11px; font-weight: 700; border-radius: 10px; padding: 2px 8px; }
+.etikett.geplant { background: color-mix(in srgb, var(--blue) 18%, var(--bg)); color: #7aa7f5; }
+.etikett.abgerechnet { background: color-mix(in srgb, var(--amber) 18%, var(--bg)); color: var(--amber); }
+.etikett.teilweise { background: color-mix(in srgb, var(--blue) 18%, var(--bg)); color: var(--blue); }
+.etikett.bezahlt { background: color-mix(in srgb, var(--green) 18%, var(--bg)); color: var(--green); }
+.etikett.fehlt { background: color-mix(in srgb, var(--red) 18%, var(--bg)); color: var(--rhell); }
+.etikett.rolle { background: var(--soft); color: var(--phell); }
+
+.kacheln { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+.kachel { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; }
+.kachel .zahl { font-size: 20px; font-weight: 800; margin-top: 2px; }
+
+.knopf { display: block; width: 100%; margin-top: 10px; padding: 11px; border-radius: 8px; background: var(--purple); color: #fff; font-weight: 700; text-align: center; }
+.knopf.zweit { background: none; border: 1px solid var(--border); color: var(--phell); }
+
+#menue { position: fixed; inset: 0; background: rgba(0, 0, 0, .55); display: flex; align-items: flex-end; }
+#menue-inhalt { width: 100%; background: var(--card); border-top: 1px solid var(--border); border-radius: 16px 16px 0 0;
+  padding: 12px 16px calc(16px + env(safe-area-inset-bottom)); }
+.menuepunkt { display: block; width: 100%; text-align: left; padding: 13px 4px; border-bottom: 1px solid var(--border); }

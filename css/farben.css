@@ -1,0 +1,18 @@
+/* ERZEUGT von mobile/werkzeuge/erzeugen.py aus syncpro/ui/theme.py. Nicht von Hand ändern. */
+:root {
+  --bg: #0c0a13;
+  --card: #15121f;
+  --hover: #1c1829;
+  --border: #2a2438;
+  --text: #ece9f5;
+  --muted: #8f89a3;
+  --soft: #2a1f45;
+  --purple: #a855f7;
+  --teal: #14b8a6;
+  --red: #ef4444;
+  --green: #10b981;
+  --amber: #f59e0b;
+  --blue: #3b82f6;
+  --phell: #c084fc;
+  --rhell: #f87171;
+}

@@ -1,0 +1,7 @@
+sql.js (SQLite für den Browser), fest beigelegt, kein npm im Projekt.
+Version: 1.17.0   Lizenz: MIT (LICENSE-sqljs.txt)
+Quelle: https://registry.npmjs.org/sql.js/-/sql.js-1.17.0.tgz (22.11.2026), Archiv-Prüfsumme sha512 laut Registry bestätigt.
+Aus dem Archiv übernommen: dist/sql-wasm.js und dist/sql-wasm.wasm, unverändert.
+sha256 sql-wasm.js:   d6a9cc234ef1104c49d5c3756bc5c85e312213e9d072fdcdb4523089a51d0fcd
+sha256 sql-wasm.wasm: 6918fd54c1192011b85af0365a819411285bb5579b9ae6a7308778a1750a2765
+Aktualisieren: neue Version von Hand holen, Prüfsumme prüfen, diese Datei und alle Tests (tests/test_mobile_app.py) nachziehen.
